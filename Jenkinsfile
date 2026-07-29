@@ -8,7 +8,7 @@ pipeline {
         }
         stage ('building in specific branch') {
             when {
-                expression (BRANCH_NAME ==~ /(production|staging)/)
+                expression { BRANCH_NAME ==~ /(production|staging)/}
             }
             steps{
                 echo "deploying the application"
