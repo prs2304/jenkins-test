@@ -4,14 +4,12 @@ pipeline {
         DEPLOY = 'staging'
     }
     stages {
-        stage ('build') {
+        stage('build') {
+            when {
+                environment name: 'DEPLOY', value: 'production'
+            }
             steps {
-                when {
-                    environment name: 'DEPLOY', value: 'production'
-                }
-                step {
-                    echo 'building in production environment'
-                }
+                echo 'building in production environment'
             }
         }
     }
