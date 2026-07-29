@@ -1,15 +1,17 @@
 pipeline {
     agent any
-    environment {
-        DEPLOY = 'staging'
-    }
     stages {
-        stage('build') {
-            when {
-                environment name: 'DEPLOY', value: 'production'
-            }
+        stage ('build') {
             steps {
-                echo 'building in production environment'
+                echo "building the application"
+            }
+        }
+        stage ('building in specific branch') {
+            when {
+                expression (BRANCH_NAME ==~ /(production|staging)/)
+            }
+            steps{
+                echo "deploying the application"
             }
         }
     }
